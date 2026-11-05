@@ -1,0 +1,27 @@
+{
+  "api_version": 1,
+  "id": "fivefold",
+  "version": 1,
+  "title": "Fivefold",
+  "description": "Follow the evidence. Find one word in six thoughtful guesses.",
+  "tagline": "Five letters. Follow the evidence, one guess at a time.",
+  "skill": "Letter deduction",
+  "theme": "blue",
+  "art": "FOUND",
+  "entry": "game.js",
+  "english_rules": [
+    {
+      "pointer": "/answer",
+      "length": 5,
+      "lexicon": "answers",
+      "avoid_reuse": true
+    }
+  ],
+  "generated_fields": ["/clue"],
+  "clue_rules": [
+    {
+      "pointer": "/clue",
+      "answer_pointer": "/answer"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+name: Checks
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-bookworm
+        env:
+          POSTGRES_USER: wordgames
+          POSTGRES_PASSWORD: test_only
+          POSTGRES_DB: wordgames_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U wordgames -d wordgames_test"
+          --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgres://wordgames:test_only@localhost:5432/wordgames_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm test
+      - run: cargo fmt --manifest-path backend/Cargo.toml --check
+      - run: cargo clippy --locked --manifest-path backend/Cargo.toml --all-targets -- -D warnings
+      - run: cargo test --locked --manifest-path backend/Cargo.toml
+      - run: cargo test --locked --manifest-path backend/Cargo.toml --test publishing -- --ignored
+      - run: POSTGRES_PASSWORD=test_only docker compose config --quiet
+      - run: docker build -t wordgames:test .
+      - run: POSTGRES_PASSWORD=test_only docker compose up -d web
+      - name: Smoke test Compose API
+        run: |
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://localhost:8080/api/v1/daily > /tmp/wordgames-daily.json; then break; fi
+            sleep 2
+          done
+          node --input-type=module -e 'import fs from "node:fs"; import {validatePayload} from "./js/content.js"; const data=validatePayload(JSON.parse(fs.readFileSync("/tmp/wordgames-daily.json"))); if(data.games.some(g=>!g.puzzle))process.exit(1);'
+      - name: Smoke test cron worker process
+        run: |
+          docker compose up -d worker
+          sleep 3
+          docker compose exec -T worker busybox ps > /tmp/wordgames-worker.txt
+          node -e 'const fs=require("node:fs"); if(!fs.readFileSync("/tmp/wordgames-worker.txt","utf8").includes("crond -f"))process.exit(1);'
+        env:
+          POSTGRES_PASSWORD: test_only
+      - if: always()
+        run: docker compose logs --no-color && docker compose down --volumes
+        env:
+          POSTGRES_PASSWORD: test_only

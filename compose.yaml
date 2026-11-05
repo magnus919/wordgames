@@ -1,0 +1,62 @@
+services:
+  postgres:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_DB: wordgames
+      POSTGRES_USER: wordgames
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wordgames -d wordgames"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+  init:
+    build: .
+    command: ["/app/wordgames", "bootstrap"]
+    volumes:
+      - ./games:/app/games:ro
+    environment:
+      DATABASE_URL: postgres://wordgames:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/wordgames
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+  web:
+    build: .
+    volumes:
+      - ./games:/app/games:ro
+    ports:
+      - "${WEB_BIND:-127.0.0.1}:${PORT:-8080}:8080"
+    environment:
+      DATABASE_URL: postgres://wordgames:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/wordgames
+      BIND_ADDRESS: 0.0.0.0:8080
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        ["CMD", "curl", "--fail", "--silent", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 6s
+      retries: 3
+    restart: unless-stopped
+  worker:
+    build: .
+    user: root
+    command: ["/app/worker.sh"]
+    volumes:
+      - ./games:/app/games:ro
+    environment:
+      DATABASE_URL: postgres://wordgames:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/wordgames
+      LLM_CHAT_URL: ${LLM_CHAT_URL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+volumes:
+  postgres-data:

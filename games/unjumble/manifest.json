@@ -1,0 +1,39 @@
+{
+  "api_version": 1,
+  "id": "unjumble",
+  "version": 1,
+  "title": "Unjumble",
+  "description": "See the word in the tangle. Six letters, a clue, and a little rearranging.",
+  "tagline": "A tangle of letters. A word waiting to be found.",
+  "skill": "Letters & meaning",
+  "theme": "yellow",
+  "art": "UNMIX",
+  "entry": "game.js",
+  "english_rules": [
+    {
+      "pointer": "/answer",
+      "length": 6,
+      "lexicon": "answers",
+      "avoid_reuse": true
+    },
+    {
+      "pointer": "/accepted_answers/*",
+      "length": 6,
+      "lexicon": "guesses",
+      "avoid_reuse": false
+    }
+  ],
+  "generated_fields": ["/clue"],
+  "clue_rules": [
+    {
+      "pointer": "/clue",
+      "answer_pointer": "/accepted_answers/*"
+    }
+  ],
+  "anagram_rules": [
+    {
+      "pointer": "/accepted_answers/*",
+      "answer_pointer": "/answer"
+    }
+  ]
+}

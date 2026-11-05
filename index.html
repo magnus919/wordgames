@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#2649df" />
+    <meta
+      name="description"
+      content="A daily word desk. Find patterns, untangle letters, and discover a little more about words."
+    />
+    <title>Wordgames · Your daily word desk</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to puzzles</a>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Wordgames home"
+        ><span class="brand-icon" aria-hidden="true">w.</span>wordgames</a
+      ><button id="help" class="quiet">
+        How to play <span class="question" aria-hidden="true">?</span>
+      </button>
+    </header>
+    <main id="main" tabindex="-1">
+      <div id="loading" role="status" class="loading">
+        Setting out today’s words…
+      </div>
+      <div id="unavailable" hidden class="unavailable">
+        <h1>A short pause.</h1>
+        <p id="load-error" role="alert"></p>
+        <button id="retry" class="primary">Try again</button>
+      </div>
+      <p id="demo" class="demo" hidden>
+        Design preview · sample puzzles, repeating every 31 days
+      </p>
+      <section id="home" hidden>
+        <div class="home-intro">
+          <div>
+            <p id="today" class="date"></p>
+            <h1>Your daily<br />word desk.</h1>
+            <p class="lede">
+              A little deduction. A little discovery.<br />Fresh reasons to play
+              with words.
+            </p>
+          </div>
+          <aside class="daily-progress" aria-label="Your daily progress">
+            <div class="progress-art" aria-hidden="true">
+              <span>A</span><span>h</span><span>a</span><b>!</b>
+            </div>
+            <p id="daily-count">A small daily ritual.</p>
+            <div
+              id="activity"
+              class="activity"
+              aria-label="Your last seven days"
+            ></div>
+            <p class="small">
+              Your week in words. One dot for each day you played.
+            </p>
+          </aside>
+        </div>
+        <div id="games" class="games"></div>
+        <div class="home-note">
+          <span aria-hidden="true">✳</span>
+          <p>
+            No rush. No leaderboard. Just a moment for your mind.<br /><span
+              >New puzzles at midnight UTC. Your progress stays in this
+              browser.</span
+            >
+          </p>
+        </div>
+      </section>
+      <section id="game" hidden aria-labelledby="game-title">
+        <nav class="game-nav">
+          <a class="back" href="#">← All puzzles</a
+          ><span id="puzzle-number" class="date"></span>
+        </nav>
+        <div class="game-heading">
+          <h1 id="game-title"></h1>
+          <p id="game-description"></p>
+        </div>
+        <div id="game-root"></div>
+        <p id="message" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div id="result" hidden class="result" aria-labelledby="result-title">
+          <div>
+            <p class="result-kicker">Today’s word, discovered</p>
+            <h2 id="result-title"></h2>
+            <p id="result-detail"></p>
+            <p id="word-note" class="word-note"></p>
+            <p id="strategy" class="small"></p>
+          </div>
+          <div class="result-actions">
+            <button id="share" class="primary">Share your result</button
+            ><a id="next-game" class="secondary" href="#"></a>
+            <p id="reset-note" class="small"></p>
+          </div>
+          <textarea
+            id="share-fallback"
+            aria-label="Copy your result"
+            readonly
+            hidden
+          ></textarea>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>A little play. A little possibility.</span
+      ><span>English words · No account needed</span>
+    </footer>
+    <dialog id="instructions" aria-labelledby="help-title">
+      <button
+        id="close-help"
+        class="dialog-close"
+        aria-label="Close instructions"
+      >
+        ×
+      </button>
+      <h2 id="help-title">Make yourself at home.</h2>
+      <div id="game-instructions"></div>
+      <h3>Play your way</h3>
+      <p>
+        There’s no timer. Optional hints offer a little help and are shown in
+        shared results. After the puzzle, explore the word’s meaning and try
+        another game.
+      </p>
+      <p class="fine-print">
+        One edition per day, changing at midnight UTC. Progress and activity
+        stay on this device using local storage and completion cookies. Clearing
+        browser data resets them. Answers are checked in your browser. This is
+        wordplay, with no claims of proven cognitive or health benefits.
+      </p>
+    </dialog>
+  </body>
+</html>

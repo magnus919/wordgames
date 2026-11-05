@@ -1,0 +1,303 @@
+{
+  "fixtures": [
+    {
+      "language": "en",
+      "answer": "GARDEN",
+      "clue": "A little patch of growing things.",
+      "note": "A little patch of growing things.",
+      "accepted_answers": ["GARDEN"]
+    },
+    {
+      "language": "en",
+      "answer": "POCKET",
+      "clue": "A small hiding place in your clothes.",
+      "note": "A small hiding place in your clothes.",
+      "accepted_answers": ["POCKET"]
+    },
+    {
+      "language": "en",
+      "answer": "CASTLE",
+      "clue": "A home fit for royalty.",
+      "note": "A home fit for royalty.",
+      "accepted_answers": ["CASTLE"]
+    },
+    {
+      "language": "en",
+      "answer": "RIBBON",
+      "clue": "A finishing touch on a present.",
+      "note": "A finishing touch on a present.",
+      "accepted_answers": ["RIBBON"]
+    },
+    {
+      "language": "en",
+      "answer": "PLANET",
+      "clue": "A world of its own.",
+      "note": "A world of its own.",
+      "accepted_answers": ["PLANET"]
+    },
+    {
+      "language": "en",
+      "answer": "CANDLE",
+      "clue": "A little light with a wick.",
+      "note": "A little light with a wick.",
+      "accepted_answers": ["CANDLE"]
+    },
+    {
+      "language": "en",
+      "answer": "BRIDGE",
+      "clue": "The way across.",
+      "note": "The way across.",
+      "accepted_answers": ["BRIDGE"]
+    },
+    {
+      "language": "en",
+      "answer": "PENCIL",
+      "clue": "A tool for your first draft.",
+      "note": "A tool for your first draft.",
+      "accepted_answers": ["PENCIL"]
+    },
+    {
+      "language": "en",
+      "answer": "BASKET",
+      "clue": "Carry a picnic in this.",
+      "note": "Carry a picnic in this.",
+      "accepted_answers": ["BASKET"]
+    },
+    {
+      "language": "en",
+      "answer": "SILVER",
+      "clue": "The medal just behind gold.",
+      "note": "The medal just behind gold.",
+      "accepted_answers": ["SILVER"]
+    },
+    {
+      "language": "en",
+      "answer": "FOREST",
+      "clue": "Where the trees keep company.",
+      "note": "Where the trees keep company.",
+      "accepted_answers": ["FOREST"]
+    },
+    {
+      "language": "en",
+      "answer": "PUZZLE",
+      "clue": "You are solving one right now.",
+      "note": "You are solving one right now.",
+      "accepted_answers": ["PUZZLE"]
+    },
+    {
+      "language": "en",
+      "answer": "ORANGE",
+      "clue": "A fruit with a color to match.",
+      "note": "A fruit with a color to match.",
+      "accepted_answers": ["ORANGE"]
+    },
+    {
+      "language": "en",
+      "answer": "KITTEN",
+      "clue": "A very small companion with whiskers.",
+      "note": "A very small companion with whiskers.",
+      "accepted_answers": ["KITTEN"]
+    },
+    {
+      "language": "en",
+      "answer": "ANCHOR",
+      "clue": "It keeps a boat in place.",
+      "note": "It keeps a boat in place.",
+      "accepted_answers": ["ANCHOR"]
+    },
+    {
+      "language": "en",
+      "answer": "SUNSET",
+      "clue": "The sky’s evening show.",
+      "note": "The sky’s evening show.",
+      "accepted_answers": ["SUNSET"]
+    },
+    {
+      "language": "en",
+      "answer": "BUTTON",
+      "clue": "A tiny fastener.",
+      "note": "A tiny fastener.",
+      "accepted_answers": ["BUTTON"]
+    },
+    {
+      "language": "en",
+      "answer": "MEADOW",
+      "clue": "An open field of grass and flowers.",
+      "note": "An open field of grass and flowers.",
+      "accepted_answers": ["MEADOW"]
+    },
+    {
+      "language": "en",
+      "answer": "PARROT",
+      "clue": "A colorful conversationalist.",
+      "note": "A colorful conversationalist.",
+      "accepted_answers": ["PARROT"]
+    },
+    {
+      "language": "en",
+      "answer": "ROCKET",
+      "clue": "A ride beyond the atmosphere.",
+      "note": "A ride beyond the atmosphere.",
+      "accepted_answers": ["ROCKET"]
+    },
+    {
+      "language": "en",
+      "answer": "WINTER",
+      "clue": "The coldest chapter of the year.",
+      "note": "The coldest chapter of the year.",
+      "accepted_answers": ["WINTER"]
+    },
+    {
+      "language": "en",
+      "answer": "BEETLE",
+      "clue": "An insect in a little suit of armor.",
+      "note": "An insect in a little suit of armor.",
+      "accepted_answers": ["BEETLE"]
+    },
+    {
+      "language": "en",
+      "answer": "MIRROR",
+      "clue": "A familiar face looks back.",
+      "note": "A familiar face looks back.",
+      "accepted_answers": ["MIRROR"]
+    },
+    {
+      "language": "en",
+      "answer": "NAPKIN",
+      "clue": "A dinner-table helper.",
+      "note": "A dinner-table helper.",
+      "accepted_answers": ["NAPKIN"]
+    },
+    {
+      "language": "en",
+      "answer": "STREAM",
+      "clue": "A river’s smaller relative.",
+      "note": "A river’s smaller relative.",
+      "accepted_answers": ["MASTER", "STREAM", "TAMERS"]
+    },
+    {
+      "language": "en",
+      "answer": "VELVET",
+      "clue": "A fabric with a soft touch.",
+      "note": "A fabric with a soft touch.",
+      "accepted_answers": ["VELVET"]
+    },
+    {
+      "language": "en",
+      "answer": "CHERRY",
+      "clue": "A small fruit with a stone inside.",
+      "note": "A small fruit with a stone inside.",
+      "accepted_answers": ["CHERRY"]
+    },
+    {
+      "language": "en",
+      "answer": "MUSEUM",
+      "clue": "A place to meet the past.",
+      "note": "A place to meet the past.",
+      "accepted_answers": ["MUSEUM"]
+    },
+    {
+      "language": "en",
+      "answer": "TRAVEL",
+      "clue": "Go somewhere new.",
+      "note": "Go somewhere new.",
+      "accepted_answers": ["TRAVEL"]
+    },
+    {
+      "language": "en",
+      "answer": "WAFFLE",
+      "clue": "Breakfast with little squares.",
+      "note": "Breakfast with little squares.",
+      "accepted_answers": ["WAFFLE"]
+    },
+    {
+      "language": "en",
+      "answer": "SPIRAL",
+      "clue": "A curve that keeps going around.",
+      "note": "A curve that keeps going around.",
+      "accepted_answers": ["SPIRAL"]
+    }
+  ],
+  "lexicons": {
+    "answers": [
+      "GARDEN",
+      "POCKET",
+      "CASTLE",
+      "RIBBON",
+      "PLANET",
+      "CANDLE",
+      "BRIDGE",
+      "PENCIL",
+      "BASKET",
+      "SILVER",
+      "FOREST",
+      "PUZZLE",
+      "ORANGE",
+      "KITTEN",
+      "ANCHOR",
+      "SUNSET",
+      "BUTTON",
+      "MEADOW",
+      "PARROT",
+      "ROCKET",
+      "WINTER",
+      "BEETLE",
+      "MIRROR",
+      "NAPKIN",
+      "STREAM",
+      "VELVET",
+      "CHERRY",
+      "MUSEUM",
+      "TRAVEL",
+      "WAFFLE",
+      "SPIRAL"
+    ],
+    "guesses": [
+      "ANCHOR",
+      "BASKET",
+      "BEETLE",
+      "BRIDGE",
+      "BUTTON",
+      "CANDLE",
+      "CASTLE",
+      "CHERRY",
+      "ENLIST",
+      "FOREST",
+      "GARDEN",
+      "INLETS",
+      "KITTEN",
+      "LISTEN",
+      "MASTER",
+      "MEADOW",
+      "MIRROR",
+      "MUSEUM",
+      "NAPKIN",
+      "ORANGE",
+      "PARROT",
+      "PENCIL",
+      "PLANET",
+      "POCKET",
+      "PUZZLE",
+      "RECUSE",
+      "RESCUE",
+      "REVELS",
+      "RIBBON",
+      "ROCKET",
+      "SALTER",
+      "SECURE",
+      "SILENT",
+      "SILVER",
+      "SLATER",
+      "SPIRAL",
+      "STALER",
+      "STREAM",
+      "SUNSET",
+      "TAMERS",
+      "TINSEL",
+      "TRAVEL",
+      "VELVET",
+      "WAFFLE",
+      "WINTER"
+    ]
+  }
+}

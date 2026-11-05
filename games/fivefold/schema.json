@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["language", "answer", "clue", "note"],
+  "properties": {
+    "language": {
+      "const": "en"
+    },
+    "answer": {
+      "type": "string",
+      "pattern": "^[A-Z]{5}$",
+      "minLength": 5,
+      "maxLength": 5
+    },
+    "clue": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 180
+    },
+    "note": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 240
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "wordgames",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 5173",
+    "test": "node --test",
+    "check:games": "cargo run --locked --manifest-path backend/Cargo.toml -- validate-games",
+    "new:game": "node scripts/scaffold-game.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  }
+}
