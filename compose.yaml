@@ -2,13 +2,14 @@ services:
   postgres:
     image: postgres:17-bookworm
     environment:
-      POSTGRES_DB: wordgames
-      POSTGRES_USER: wordgames
+      POSTGRES_DB: ${POSTGRES_DB:-wordgames}
+      POSTGRES_USER: ${POSTGRES_USER:-wordgames}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U wordgames -d wordgames"]
+      test:
+        ["CMD-SHELL", 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
       interval: 5s
       timeout: 3s
       retries: 10
@@ -17,9 +18,10 @@ services:
     build: .
     command: ["/app/wordgames", "bootstrap"]
     volumes:
-      - ./games:/app/games:ro
+      - ${GAMES_PATH:-./games}:/app/games:ro
     environment:
-      DATABASE_URL: postgres://wordgames:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/wordgames
+      DATABASE_URL: postgres://${POSTGRES_USER:-wordgames}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/${POSTGRES_DB:-wordgames}
+      RUST_LOG: ${RUST_LOG:-wordgames=info,tower_http=info}
     depends_on:
       postgres:
         condition: service_healthy
@@ -27,12 +29,13 @@ services:
   web:
     build: .
     volumes:
-      - ./games:/app/games:ro
+      - ${GAMES_PATH:-./games}:/app/games:ro
     ports:
       - "${WEB_BIND:-127.0.0.1}:${PORT:-8080}:8080"
     environment:
-      DATABASE_URL: postgres://wordgames:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/wordgames
+      DATABASE_URL: postgres://${POSTGRES_USER:-wordgames}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/${POSTGRES_DB:-wordgames}
       BIND_ADDRESS: 0.0.0.0:8080
+      RUST_LOG: ${RUST_LOG:-wordgames=info,tower_http=info}
     depends_on:
       init:
         condition: service_completed_successfully
@@ -48,12 +51,15 @@ services:
     user: root
     command: ["/app/worker.sh"]
     volumes:
-      - ./games:/app/games:ro
+      - ${GAMES_PATH:-./games}:/app/games:ro
     environment:
-      DATABASE_URL: postgres://wordgames:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/wordgames
+      DATABASE_URL: postgres://${POSTGRES_USER:-wordgames}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@postgres:5432/${POSTGRES_DB:-wordgames}
       LLM_CHAT_URL: ${LLM_CHAT_URL:-}
       LLM_API_KEY: ${LLM_API_KEY:-}
       LLM_MODEL: ${LLM_MODEL:-}
+      CRON_SCHEDULE: ${CRON_SCHEDULE:-17 3 * * *}
+      GENERATE_ON_STARTUP: "${GENERATE_ON_STARTUP:-true}"
+      RUST_LOG: ${RUST_LOG:-wordgames=info,tower_http=info}
     depends_on:
       init:
         condition: service_completed_successfully

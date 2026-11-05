@@ -18,7 +18,7 @@ These are implementer-run checks, not independent acceptance certification. No s
 
 ## Automated results, November 5, 2026
 
-- `npm test`: **18 passed**. Includes registry/clock boundaries, both game contracts, invalid vocabulary, duplicate-letter scoring, alternate anagrams, hints and sharing, generic storage, and a scaffolded third game's actual dynamic import.
+- `npm test`: **20 passed**. Includes registry/clock boundaries, both game contracts, invalid vocabulary, duplicate-letter scoring, alternate anagrams, hints and sharing, generic storage, a scaffolded third game's actual dynamic import, and cron configuration/injection rejection.
 - `cargo test --locked --manifest-path backend/Cargo.toml`: **4 domain tests and 2 non-DB integration tests passed**. The four DB tests are intentionally ignored by this command and were separately executed below. Model tests use a local HTTP mock, including malformed JSON, HTTP 429 and oversized output. Installer tests stage/discover a third package and reject overwrites.
 - Explicit PostgreSQL suite: **4 passed**, against isolated schemas in temporary PostgreSQL **17.11**. Tests exercise concurrent publication, immutable update/delete, reuse rejection, validation failure without a row, audit/retry recovery, today's API availability, and the real Rust replenishment loop rejecting three wrong-length model responses then publishing one valid retry. A second worker pass publishes zero duplicates.
 - `cargo clippy --locked --manifest-path backend/Cargo.toml --all-targets -- -D warnings`: passed.
@@ -51,7 +51,9 @@ The final native service was restarted after validation to serve the current emb
 
 ## Evidence still missing
 
-Docker is not installed on this host, so local Docker image build, Compose execution, cron process behavior and container restart/persistence are **not verified**. CI is configured to build the image, run Compose, validate a healthy daily API and check cron startup, but that workflow has not run on a remote repository. Native PostgreSQL tests establish database/application behavior, not container deployment readiness.
+Docker Engine is not installed on this host. Configuration-only checks were run with the official standalone Docker Compose **v5.7.0**, downloaded to a temporary directory and checksum-verified against the release metadata. Both the local Compose file and the HTTPS override render successfully. `scripts/check-compose.mjs` verifies custom database names/credentials, logging, port and package-mount settings, worker schedule/startup settings, and that LLM variables reach only worker. Shell syntax checks also passed for the worker scripts and ten deployment/configuration documentation examples.
+
+Local Docker image build, container execution, cron process behavior, Caddy certificate issuance and container restart/persistence remain **not verified**. CI is configured to build the image, run Compose, validate a healthy daily API and check cron startup, but that workflow has not run on a remote repository. Native PostgreSQL tests establish database/application behavior, not container deployment readiness.
 
 Native mobile share sheets, clipboard-denial fallback, screen-reader behavior, real touch devices, and the full browser matrix remain unverified. Share formatting and answer exclusion have automated coverage; that does not establish every platform integration. Browser emulated sizes are not physical device evidence.
 

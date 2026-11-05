@@ -4,6 +4,11 @@ A daily English word-game site with a Rust backend, PostgreSQL content store, sc
 
 **Fivefold** is a six-guess letter-deduction game. **Unjumble** is a gentler six-letter rearrangement puzzle with a clue, no attempt limit, and accepted English alternatives. Both offer optional hints, accessible color/symbol feedback, saved daily progress, a word note after play, and spoiler-free sharing with hint disclosure.
 
+Operator configuration is externalized through Docker environment variables, including LLM settings and the worker schedule. Start with the checked-in guides:
+
+- [Configuration reference](docs/configuration.md): variables, defaults, secret handling and applying changes.
+- [Build and deployment runbook](docs/deployment.md): image builds, Compose, public HTTPS, external PostgreSQL, backups and upgrades.
+
 ## Run with Docker
 
 ```sh
@@ -12,9 +17,9 @@ cp .env.example .env
 docker compose up --build -d
 ```
 
-Open http://localhost:8080. PostgreSQL is private to the Compose network and persists in a named volume. The init service migrates and bootstraps 14 dates of curated content per new game. The Rust web service runs as a non-root user. The cron worker runs at startup and at 03:17 UTC each day, keeping today plus the following 13 days populated. Worker credentials stay server-side. When no provider is configured, the bootstrap buffer works but replenishment fails visibly; configure the worker before that buffer runs out.
+Open http://localhost:8080. PostgreSQL is private to the Compose network and persists in a named volume. The init service migrates and bootstraps 14 dates of curated content per new game. The Rust web service runs as a non-root user. The cron worker runs at startup and at 03:17 UTC each day by default (`CRON_SCHEDULE` controls this), keeping today plus the following 13 days populated. Worker credentials stay server-side. When no provider is configured, the bootstrap buffer works but replenishment fails visibly; configure the worker before that buffer runs out.
 
-The default web bind is loopback. Configure a TLS reverse proxy for public hosting. The public API intentionally includes answers for browser checks. Do not mistake cookies for anti-cheat enforcement.
+The default web bind is loopback. For public hosting, the supplied `compose.production.yaml` adds Caddy HTTPS using `SITE_DOMAIN` and `ACME_EMAIL` environment variables; see the deployment runbook. The public API intentionally includes answers for browser checks. Do not mistake cookies for anti-cheat enforcement.
 
 ## Local development
 

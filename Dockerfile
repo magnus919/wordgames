@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 WORKDIR /app
 COPY --from=build /build/backend/target/release/wordgames /app/wordgames
 COPY ops/worker.sh /app/worker.sh
-COPY ops/crontab /etc/crontabs/root
-RUN chmod 755 /app/worker.sh && chmod 600 /etc/crontabs/root
+COPY ops/render-crontab.sh /app/render-crontab.sh
+RUN chmod 755 /app/worker.sh /app/render-crontab.sh && mkdir -p /etc/crontabs
 COPY games /app/games
 ENV TZ=UTC GAMES_DIR=/app/games
 EXPOSE 8080

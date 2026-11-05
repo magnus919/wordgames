@@ -31,7 +31,9 @@ jobs:
       - run: cargo clippy --locked --manifest-path backend/Cargo.toml --all-targets -- -D warnings
       - run: cargo test --locked --manifest-path backend/Cargo.toml
       - run: cargo test --locked --manifest-path backend/Cargo.toml --test publishing -- --ignored
+      - run: node scripts/check-compose.mjs docker compose
       - run: POSTGRES_PASSWORD=test_only docker compose config --quiet
+      - run: SITE_DOMAIN=games.example.com ACME_EMAIL=ops@example.com POSTGRES_PASSWORD=test_only docker compose -f compose.yaml -f compose.production.yaml config --quiet
       - run: docker build -t wordgames:test .
       - run: POSTGRES_PASSWORD=test_only docker compose up -d web
       - name: Smoke test Compose API
