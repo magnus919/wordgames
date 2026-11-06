@@ -16,6 +16,15 @@ These are implementer-run checks, not independent acceptance certification. No s
 | Clue accuracy and appropriate difficulty | High     | Curated definitions; structure is not semantic proof. Requires editorial evaluation and player research.                                                 |
 | Deployment or scheduling fails           | High     | Container build, Compose health/API, cron startup, DB restart/persistence. Requires Docker runtime evidence.                                             |
 
+## Fivefold dictionary regression, November 6, 2026
+
+The live Fivefold clue “Think of a bird with long legs.” reproduced the reported rejection of STORK. The accepted guess list had only 781 entries. The [dictionary update](dictionaries.md) expands it to 12,578 five-letter words while retaining every original guess and leaving all answer lists, fixtures, schema versions and game logic unchanged.
+
+- `npm test`: **25 passed**, including STORK acceptance, other common words outside the answer pool, invalid and repeated input without state mutation, preserved guesses/hints after reload, and deterministic generation from the pinned source.
+- `npm run format:check`, `cargo fmt`, `cargo clippy --all-targets -- -D warnings`, and `npm run check:games`: passed.
+- Rust unit/non-DB integration tests: **6 passed**. The explicit PostgreSQL suite: **4 passed** in a fresh isolated temporary instance. An initial attempt against yesterday's inactive disposable instance timed out; no production database was used for tests.
+- Independent review confirmed all 781 original guesses are retained and every other catalog field is identical. The imported dictionary's MIT notice is included in the game package so Docker copies it with the dictionary.
+
 ## Automated results, November 5, 2026
 
 - `npm test`: **20 passed**. Includes registry/clock boundaries, both game contracts, invalid vocabulary, duplicate-letter scoring, alternate anagrams, hints and sharing, generic storage, a scaffolded third game's actual dynamic import, and cron configuration/injection rejection.
@@ -57,4 +66,4 @@ Local Docker image build, container execution, cron process behavior, Caddy cert
 
 Native mobile share sheets, clipboard-denial fallback, screen-reader behavior, real touch devices, and the full browser matrix remain unverified. Share formatting and answer exclusion have automated coverage; that does not establish every platform integration. Browser emulated sizes are not physical device evidence.
 
-The starter catalogs have 31 canonical answers per game and a limited accepted-guess vocabulary. English membership means membership in the curated module lexicon; neither an LLM language label nor JSON Schema can certify semantic language quality. Catalog expansion, human editorial checks, real-player engagement testing and a configured provider are required before a sustained public launch. No cognitive or health benefit is claimed.
+The starter catalogs have 31 canonical answers per game. Fivefold now uses a broader, pinned [English guess dictionary](dictionaries.md); Unjumble retains its curated vocabulary. English membership means membership in the curated module lexicon; neither an LLM language label nor JSON Schema can certify semantic language quality. Catalog expansion, human editorial checks, real-player engagement testing and a configured provider are required before a sustained public launch. No cognitive or health benefit is claimed.

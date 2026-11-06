@@ -60,7 +60,7 @@ The Rust worker calls a configured HTTPS OpenAI-compatible chat-completions endp
 
 Rejected/failed attempts are recorded separately and never become daily puzzles. Each date gets at most three attempts per run (42 calls per game for a completely empty 14-day buffer); timeouts and response-size limits bound each call. Retry happens on the next scheduled run. Existing games' published dates do not change when another module is installed. Process interruption can leave a `started` audit record; retries check durable editions rather than treating that record as completion.
 
-The current packages have **31 canonical answers each and a deliberately limited English guess list**. Expand the curated catalogs before a longer launch. Generation fails closed when unused words run out; it cannot admit its own vocabulary. Automated checks establish structure, dictionary membership and publication invariants, not semantic accuracy, engaging difficulty, or cognitive/medical benefit. Human editorial and player evaluation are still needed.
+The current packages have **31 canonical answers each**. Fivefold accepts **12,578 five-letter English guesses** from a pinned, licensed word-game dictionary; see [dictionary provenance and regeneration](docs/dictionaries.md). Unjumble retains its curated accepted alternatives. Expand the curated catalogs before a longer launch. Generation fails closed when unused words run out; it cannot admit its own vocabulary. Automated checks establish structure, dictionary membership and publication invariants, not semantic accuracy, engaging difficulty, or cognitive/medical benefit. Human editorial and player evaluation are still needed.
 
 ## Verification
 
