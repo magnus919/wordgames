@@ -3,10 +3,13 @@
   color: #18233e;
   background: #f5f6fc;
   font-synthesis: none;
+  color-scheme: only light;
   --ink: #18233e;
   --blue: #2649df;
   --yellow: #ffdf63;
   --green: #267651;
+  --feedback-yellow: #ffdf00;
+  --feedback-red: #b91c1c;
   --muted: #58657c;
   --line: #d5dceb;
   --paper: #f5f6fc;
@@ -472,14 +475,14 @@ footer {
 }
 .tile.present,
 .sample.present {
-  background: #f3cf58;
-  border-color: #f3cf58;
+  background: var(--feedback-yellow);
+  border-color: var(--feedback-yellow);
   color: var(--ink);
 }
 .tile.absent,
 .sample.absent {
-  background: #647087;
-  border-color: #647087;
+  background: var(--feedback-red);
+  border-color: var(--feedback-red);
   color: white;
 }
 .play-companion {
@@ -662,10 +665,10 @@ input[aria-invalid="true"] {
   color: white;
 }
 .key.present {
-  background: #f3cf58;
+  background: var(--feedback-yellow);
 }
 .key.absent {
-  background: #647087;
+  background: var(--feedback-red);
   color: white;
 }
 .jumble-board {

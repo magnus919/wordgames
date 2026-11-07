@@ -4,6 +4,11 @@ export const isEnglishWord = (word, length, dictionary) =>
   typeof word === "string" &&
   new RegExp(`^[A-Z]{${length}}$`).test(word) &&
   dictionary.includes(word);
+export const letterMeaning = {
+  correct: "Right letter in the right place",
+  present: "Right letter in the wrong place",
+  absent: "Wrong letter",
+};
 export function scoreLetters(guess, answer) {
   const marks = Array(answer.length).fill("absent"),
     remaining = answer.split("");
@@ -153,7 +158,7 @@ export function letterBoard(rows, length) {
             tile.append(el("span", "mark", symbols[score[j]]));
             tile.setAttribute(
               "aria-label",
-              `${text[j]}: ${score[j] === "present" ? "in another position" : score[j]}`,
+              `${text[j]}: ${letterMeaning[score[j]]}`,
             );
           }
           row.append(tile);
@@ -200,7 +205,7 @@ export function keyboard(onKey) {
             ? "Backspace"
             : l === "↵"
               ? "Enter"
-              : `${l}${states[l] ? ", " + states[l] : ""}`,
+              : `${l}${states[l] ? ", " + letterMeaning[states[l]] : ""}`,
         );
       }
     },
@@ -218,9 +223,9 @@ export function legend() {
   const e = el("div", "legend");
   e.append(el("h2", "", "Follow the letters"));
   for (const [mark, text] of [
-    ["correct", "Right letter, right place"],
-    ["present", "Right letter, new place"],
-    ["absent", "Not in this word"],
+    ["correct", letterMeaning.correct],
+    ["present", letterMeaning.present],
+    ["absent", letterMeaning.absent],
   ]) {
     const p = el("p"),
       s = el("span", `sample ${mark}`, symbols[mark]);

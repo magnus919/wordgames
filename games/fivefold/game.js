@@ -116,10 +116,7 @@ const plugin = {
       setMessage(
         kit
           .scoreLetters(value, puzzle.answer)
-          .map(
-            (m, i) =>
-              `${value[i]}: ${m === "present" ? "another position" : m}`,
-          )
+          .map((m, i) => `${value[i]}: ${kit.letterMeaning[m]}`)
           .join(". "),
       );
       commit({ ...state, guesses: [...state.guesses, value] });
