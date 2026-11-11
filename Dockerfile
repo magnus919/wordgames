@@ -1,4 +1,4 @@
-FROM rust:1.98-bookworm AS build
+FROM rust:1.99-bookworm AS build
 WORKDIR /build
 COPY backend backend
 COPY index.html styles.css ./
