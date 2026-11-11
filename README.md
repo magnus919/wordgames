@@ -1,5 +1,9 @@
 # Wordgames
 
+[![Checks](https://github.com/magnus919/wordgames/actions/workflows/check.yml/badge.svg)](https://github.com/magnus919/wordgames/actions/workflows/check.yml)
+
+[Play Wordgames](https://wordgames.brandyapple.com/) · [Feature roadmap](https://github.com/magnus919/wordgames/issues)
+
 A daily English word-game site with a Rust backend, PostgreSQL content store, scheduled LLM clue generation, and installable game packages. Gameplay checks, daily progress and sharing remain in the browser. There are no accounts, analytics, or player-guess APIs.
 
 **Fivefold** is a six-guess letter-deduction game. **Unjumble** is a gentler six-letter rearrangement puzzle with a clue, no attempt limit, and accepted English alternatives. Both offer optional hints, accessible color/symbol feedback, saved daily progress, a word note after play, and spoiler-free sharing with hint disclosure.
@@ -75,4 +79,13 @@ TEST_DATABASE_URL=postgres://USER:PASSWORD@localhost:5432/DISPOSABLE_DB \
 
 Database tests create isolated schemas inside a disposable database. Do not use a production database. Tests cover malformed/foreign/wrong-length model content, immutable/concurrent publication, rejection and retry audit trails, real PostgreSQL worker recovery against a mocked LLM, API availability, module installation, scoring, hints, storage, and spoiler-free sharing. CI supplies PostgreSQL and builds the Docker image. See [QA plan/evidence](docs/qa.md) and [experience/architecture decisions](docs/design.md).
 
-Browser persistence is per date and game. Local storage saves progress/hints/activity; first-party completion cookies expire after two days. Clearing browser data, another browser, or inspecting answers can bypass the honor system. No remote repository, production domain, or live LLM credentials are configured by this checkout.
+Browser persistence is per date and game. Local storage saves progress/hints/activity; first-party completion cookies expire after two days. Clearing browser data, another browser, or inspecting answers can bypass the honor system. Live credentials and operator-specific deployment settings are not included in this repository.
+
+## Community and license
+
+See [CONTRIBUTING.md](CONTRIBUTING.md), [AGENTS.md](AGENTS.md), the
+[community expectations](CODE_OF_CONDUCT.md) and [security policy](SECURITY.md).
+Maintained by [Magnus Hedemark](https://github.com/magnus919).
+
+Project code is [MIT licensed](LICENSE). Imported dictionary data retains its
+[separate MIT attribution](games/fivefold/WORD-LIST-LICENSE.txt).
